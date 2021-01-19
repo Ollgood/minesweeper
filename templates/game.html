@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link <link rel="stylesheet" type="text/css" href="styles.css">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <title>Mine-sweeper!</title>
+<!--<style>-->
+<!--table { display: block; width: 100%; }-->
+<!--td { width: 20px height 20px border: 1px solid black;}-->
+<!--tr { display: block; width: 100%; }-->
+<!--tbody { display: block; width: 100%; }-->
+<!--</style>-->
+
+  </head>
+<body>
+<h1>That's minesweeper!</h1>
+<table>
+    {% for row in range(map|length) %} <tr visibility = hidden>
+        {% for cell in range(map[row]|length) %}
+            <td onclick = check_mine("{{row}}.{{cell}}")>
+               <a id = "{{row}}.{{cell}}" style="visibility:hidden">
+                   {{ map[row][cell] }}
+               </a>
+            </td>
+        {% endfor %}</tr>
+    {% endfor %}
+</table>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
+        crossorigin="anonymous">
+
+</script>
+<script>
+   function check_mine(id) {
+   let cell = document.getElementById(id);
+   cell.style.visibility = "visible";
+   if (cell.innerText === "*") {
+   alert("You lost!")
+   location.reload();
+   }
+   }
+</script>
+</body>
+</html>
