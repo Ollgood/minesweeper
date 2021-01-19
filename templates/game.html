@@ -16,13 +16,15 @@ td {margin-top: 25px; width: 30px; height: 30px; border: 1px solid black; text-a
 td:hover {background-color: #F2ECDE;}
 tr { display: block; text-align: center; }
 tbody { display: block; margin-top: 25px;}
+.flag {cursor: move;}
   </style>
 <body>
 <h1 align="center">That's minesweeper!</h1>
 <table align="center">
-    {% for row in range(map|length) %} <tr visibility = hidden>
+    {% for row in range(map|length) %} <tr>
         {% for cell in range(map[row]|length) %}
-            <td onclick = check_mine("{{row}}.{{cell}}")>
+            <td id = "td-{{row}}.{{cell}}" onclick = check_mine("{{row}}.{{cell}}")
+                ondrop=set_flag("td-{{row}}.{{cell}}")>
                <a id = "{{row}}.{{cell}}" style="visibility:hidden">
                    {{ map[row][cell] }}
                </a>
@@ -34,15 +36,19 @@ tbody { display: block; margin-top: 25px;}
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
         crossorigin="anonymous">
-
 </script>
 <script>
+   var counter = 0
    function check_mine(id) {
    let cell = document.getElementById(id);
-   cell.style.visibility = "visible";
+   cell.style.visibility = "visible"
+   counter += 1;
    if (cell.innerText === "*") {
    alert("You lost! Better luck next time :)")
    location.reload();
+   }
+   else if (counter === 54) {
+   alert("Wow! You won!")
    }
    }
 </script>

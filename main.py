@@ -3,7 +3,9 @@ from flask import render_template, Flask
 
 application = Flask(__name__)
 
-
+# generates array of 0 of given width and height,
+# then adds mines to random coordinates (randomint)
+# then adds +=1 to fields near mines
 def create_map(width, height, mines):
     map = []
     if mines >= (width * height):
@@ -30,7 +32,8 @@ def create_map(width, height, mines):
                 if cell != height - 1 and isinstance(map[row][cell + 1], int):
                     map[row][cell + 1] += 1
                 # 17:00
-                if row != width - 1 and cell != height - 1 and isinstance(map[row + 1][cell + 1], int):
+                if row != width - 1 and cell != height - 1 \
+                        and isinstance(map[row + 1][cell + 1], int):
                     map[row + 1][cell + 1] += 1
                 # 18:00
                 if row != width - 1 and isinstance(map[row + 1][cell], int):
@@ -54,3 +57,6 @@ def create_map(width, height, mines):
 def page():
     map = create_map(8, 8, 10)
     return render_template('game.html', map = map )
+
+if __name__ == '__main__':
+    application.run(host='0.0.0.0', port=500, ssl_context='adhoc')
