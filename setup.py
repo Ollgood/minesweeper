@@ -50,7 +50,7 @@ def create_map(width, height, mines):
 
 
 
-@application.route('/game', methods = ['GET'])
+@application.route('/', methods = ['GET'])
 def page():
     map = create_map(8, 8, 10)
     return render_template('game.html', map = map )
