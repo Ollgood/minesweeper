@@ -57,6 +57,3 @@ def create_map(width, height, mines):
 def page():
     map = create_map(8, 8, 10)
     return render_template('game.html', map = map )
-
-if __name__ == '__main__':
-    application.run(host='0.0.0.0', port=500, ssl_context='adhoc')
