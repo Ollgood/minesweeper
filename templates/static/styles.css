@@ -1,9 +1,0 @@
-body {
-	min-height: 100vh;
-	background: teal url(https://assets.codepen.io/15664/bliss.jpg) center / cover no-repeat;
-}
-
-td {margin-top: 25px; width: 30px; height: 30px; border: 1px solid black; text-align: center; background-color:#DEF2EC; text-align:center;}
-td:hover {background-color: #F2ECDE;}
-tr { display: block; text-align: center; }
-tbody { display: block; margin-top: 25px;}

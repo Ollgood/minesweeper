@@ -11,25 +11,46 @@
       <title>Mine-sweeper!</title>
   </head>
   <style>
-body {min-height: 100vh; background: teal url(https://assets.codepen.io/15664/bliss.jpg) center / cover no-repeat;}
-td {margin-top: 25px; width: 30px; height: 30px; border: 1px solid black; text-align: center; background-color:#DEF2EC; text-align:center;}
-td:hover {background-color: #F2ECDE;}
-tr { display: block; text-align: center; }
-tbody { display: block; margin-top: 25px;}
-.flag {cursor: move;}
+body {
+    min-height: 100vh;
+    background: teal url(https://assets.codepen.io/15664/bliss.jpg) center / cover no-repeat;
+}
+
+td {
+    margin-top: 25px;
+    width: 30px;
+    height: 30px;
+    border: 1px solid black;
+    text-align: center;
+    background-color:#DEF2EC;
+    text-align:center;}
+
+td:hover {
+    background-color: #F2ECDE;
+    }
+
+tr {
+    display: block;
+    text-align: center;
+    }
+
   </style>
+
 <body>
 <h1 align="center">That's minesweeper!</h1>
+
 <table align="center">
-    {% for row in range(map|length) %} <tr>
+    {% for row in range(map|length) %}
+    <tr>
         {% for cell in range(map[row]|length) %}
-            <td id = "td-{{row}}.{{cell}}" onclick = check_mine("{{row}}.{{cell}}")
-                ondrop=set_flag("td-{{row}}.{{cell}}")>
+
+            <td onclick = check_mine("{{row}}.{{cell}}")>
                <a id = "{{row}}.{{cell}}" style="visibility:hidden">
                    {{ map[row][cell] }}
                </a>
             </td>
-        {% endfor %}</tr>
+        {% endfor %}
+    </tr>
     {% endfor %}
 </table>
 
@@ -37,20 +58,22 @@ tbody { display: block; margin-top: 25px;}
         integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
         crossorigin="anonymous">
 </script>
+
 <script>
-   var counter = 0
+   let counter = 0
    function check_mine(id) {
-   let cell = document.getElementById(id);
-   cell.style.visibility = "visible"
-   counter += 1;
-   if (cell.innerText === "*") {
-   alert("You lost! Better luck next time :)")
-   location.reload();
+       let cell = document.getElementById(id);
+       cell.style.visibility = "visible"
+       counter += 1;
+       if (cell.innerText === "*") {
+           alert("You lost! Better luck next time :)")
+           location.reload();
+       }
+       else if (counter === 54) {
+           alert("Wow! You won!")
+       }
    }
-   else if (counter === 54) {
-   alert("Wow! You won!")
-   }
-   }
+
 </script>
 </body>
 </html>
